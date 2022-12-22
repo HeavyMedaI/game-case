@@ -84,15 +84,17 @@
                 for(var i = 0; i < directives.length; i++){
                     operateDirective(directives[i]);
                 }
+                let client = {position: clientPosition[0]+','+clientPosition[1]+','+clientPosition[2], status: 1, state: 'pending'};
+                $.post('{{route('client.update', ["id" => 1])}}', {client: client}, function (res){
+                    if(res.status){
+                        setTimeout(() => {checkNewDirectives();}, 2000);
+                    }else{
+                        console.error(res.message);
+                    }
+                });
+            }else{
+                setTimeout(() => {checkNewDirectives();}, 2000);
             }
-            let client = {position: clientPosition[0]+','+clientPosition[1]+','+clientPosition[2], state: 'pending'};
-            $.post('{{route('client.update', ["id" => 1])}}', {client: client}, function (res){
-                if(res.status){
-                    setTimeout(() => {checkNewDirectives();}, 2000);
-                }else{
-                    console.error(res.message);
-                }
-            });
         });
     }
 
