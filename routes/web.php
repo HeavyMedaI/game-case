@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('director');
 });
 
 Route::get('director', 'App\Http\Controllers\DirectiveController@index')->name('directive');
